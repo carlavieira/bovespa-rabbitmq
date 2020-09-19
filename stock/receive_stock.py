@@ -7,7 +7,7 @@ def main():
     pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange='topic_logs', exchange_type='topic')
+    channel.exchange_declare(exchange='topic_assets', exchange_type='topic')
 
     result = channel.queue_declare(queue='', exclusive=True)
     queue_name = result.method.queue
@@ -19,7 +19,7 @@ def main():
 
     for binding_key in binding_keys:
         channel.queue_bind(
-            exchange='topic_logs', queue=queue_name, routing_key=binding_key)
+            exchange='topic_assets', queue=queue_name, routing_key=binding_key)
 
     print(' [*] Waiting for logs. To exit press CTRL+C')
 
