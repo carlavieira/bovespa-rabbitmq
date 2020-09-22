@@ -11,7 +11,7 @@ def main():
     channel = connection.channel()
 
     # Creates (if it doesn't already exist) a exchange named 'topic_assets' and with the type 'topic'
-    channel.exchange_declare(exchange='topic_assets', exchange_type='topic')
+    channel.exchange_declare(exchange='BOLSADEVALORES', exchange_type='topic')
 
     # Gets the routing key from args
     routing_key = sys.argv[1] if len(sys.argv) > 2 else 'anonymous.info'
@@ -21,7 +21,7 @@ def main():
 
     # Sends message with the routing key to the exchange named 'topic_assets'
     channel.basic_publish(
-        exchange='topic_assets', routing_key=routing_key, body=message)
+        exchange='BOLSADEVALORES', routing_key=routing_key, body=message)
     print(" [x] Sent %r:%r" % (routing_key, message))
 
     # Terminate connection

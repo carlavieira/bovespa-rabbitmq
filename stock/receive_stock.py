@@ -10,7 +10,7 @@ def main():
     channel = connection.channel()
 
     # Creates (if it doesn't already exist) a exchange named 'topic_assets' and with the type 'topic'
-    channel.exchange_declare(exchange='topic_assets', exchange_type='topic')
+    channel.exchange_declare(exchange='BROKER', exchange_type='topic')
 
     # Creates a new queue with a randon name which will be deleted at the end of the connection
     result = channel.queue_declare(queue='', exclusive=True)
@@ -29,7 +29,7 @@ def main():
     # For each binding key given, a bind is created between the exchange 'topic_assets' and the new queue created with the binding key definitions given 
     for binding_key in binding_keys:
         channel.queue_bind(
-            exchange='topic_assets', queue=queue_name, routing_key=binding_key)
+            exchange='BROKER', queue=queue_name, routing_key=binding_key)
 
     print(' [*] Waiting for logs. To exit press CTRL+C')
 
