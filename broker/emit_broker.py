@@ -2,29 +2,26 @@
 import pika
 import sys
 
-def main():
+class EmitBroker():
 
-    # Establishes connection with Rabbit MQ
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
-    channel = connection.channel()
+    def __init__(self, host, routing_key, message):
+        self.host = host
+        self.routing_key = routing_key
+        self.message = message
 
-    # Creates (if it doesn't already exist) a exchange named 'topic_assets' and with the type 'topic'
-    channel.exchange_declare(exchange='topic_assets', exchange_type='topic')
+    def publish(self):
+        # Establishes connection with Rabbit MQ
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(host=self.host))
+        channel = connection.channel()
 
-    # Gets the routing key from args
-    routing_key = sys.argv[1] if len(sys.argv) > 2 else 'anonymous.info'
+        # Creates (if it doesn't already exist) a exchange named 'BROKER' and with the type 'topic'
+        channel.exchange_declare(exchange='BROKER', exchange_type='topic')
 
-    # Gets the message from args
-    message = ' '.join(sys.argv[2:]) or 'Hello World!'
+        # Sends message with the routing key to the exchange named 'BROKER'
+        channel.basic_publish(
+            exchange='BROKER', routing_key=self.routing_key, body=self.message)
+        print(" [x] Sent %r:%r" % (self.routing_key, self.message))
 
-    # Sends message with the routing key to the exchange named 'topic_assets'
-    channel.basic_publish(
-        exchange='topic_assets', routing_key=routing_key, body=message)
-    print(" [x] Sent %r:%r" % (routing_key, message))
-
-    # Terminate connection
-    connection.close()
-
-if __name__ == '__main__':
-        main()
+        # Terminate connection
+        connection.close()
