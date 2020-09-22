@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 import pika
 import sys
+import threading
 
-class EmitBroker():
+class EmitBroker(threading.Thread):
 
     def __init__(self, host, routing_key, message):
+        threading.Thread.__init__(self)
         self.host = host
         self.routing_key = routing_key
         self.message = message
 
-    def publish(self):
+    def run(self):
         # Establishes connection with Rabbit MQ
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(host=self.host))
