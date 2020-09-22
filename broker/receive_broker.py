@@ -5,7 +5,7 @@ import sys
 import os
 
 
-class EmitBroker():
+class ReceiveBroker():
 
     def __init__(self, host, binding_keys):
         self.host = host
@@ -19,7 +19,7 @@ class EmitBroker():
                 pika.ConnectionParameters(host=self.host))
             channel = connection.channel()
 
-            # Creates (if it doesn't already exist) a exchange named 'topic_assets' and with the type 'topic'
+            # Creates (if it doesn't already exist) a exchange named 'BOLSADEVALORES' and with the type 'topic'
             channel.exchange_declare(
                 exchange='BOLSADEVALORES', exchange_type='topic')
 
@@ -29,7 +29,7 @@ class EmitBroker():
             # Gets the queue name
             queue_name = result.method.queue
 
-            # For each binding key given, a bind is created between the exchange 'topic_assets' and the new queue created with the binding key definitions given
+            # For each binding key given, a bind is created between the exchange 'BOLSADEVALORES' and the new queue created with the binding key definitions given
             for binding_key in self.binding_keys:
                 channel.queue_bind(
                     exchange='BOLSADEVALORES', queue=queue_name, routing_key=binding_key)

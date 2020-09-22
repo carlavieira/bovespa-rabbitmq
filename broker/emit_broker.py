@@ -21,7 +21,7 @@ class EmitBroker():
         # Sends message with the routing key to the exchange named 'BROKER'
         channel.basic_publish(
             exchange='BROKER', routing_key=self.routing_key, body=self.message)
-        print(" [x] Sent %r:%r" % (routing_key, message))
+        print(" [x] Sent %r:%r" % (self.routing_key, self.message))
 
         # Terminate connection
         connection.close()
