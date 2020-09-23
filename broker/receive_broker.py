@@ -8,7 +8,7 @@ import threading
 
 class ReceiveBroker(threading.Thread):
 
-    def __init__(self, host, binding_keys):
+    def __init__(self, host, binding_keys=["#"]):
         threading.Thread.__init__(self)
         self.host = host
         self.binding_keys = binding_keys
