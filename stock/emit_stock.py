@@ -3,6 +3,7 @@ import pika
 import sys
 import threading
 
+
 class EmitStock(threading.Thread):
 
     def __init__(self, host, routing_key, message):
