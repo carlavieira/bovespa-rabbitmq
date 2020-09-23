@@ -3,15 +3,17 @@
 import pika
 import sys
 import os
+import threading
 
 
-class ReceiveBroker():
+class ReceiveBroker(threading.Thread):
 
     def __init__(self, host, binding_keys):
+        threading.Thread.__init__(self)
         self.host = host
         self.binding_keys = binding_keys
 
-    def consume(self):
+    def run(self):
 
         try:
             # Establishes connection with Rabbit MQ
@@ -38,15 +40,12 @@ class ReceiveBroker():
 
             # Defines the callback message that will be invoked inside basic_consumer to print the message when a new message is received
             def callback(ch, method, properties, body):
-                print("entrou")
                 topics = method.routing_key.split(".")
                 data_menssage = body.decode().split("; ")
                 if topics[0] == "transacao":
-                    messageFormat = "Transação - Ativo: "+ topics[1].upper() + "Data-hora: " + data_menssage[0] + "Corretora-Compra: " + data_menssage[1] + "Corretora-Venda: " + data_menssage[2] + "Quantidade: " + data_menssage[3] + "Valor: " + data_menssage[4]
+                    messageFormat = "Transação - Ativo: "+ topics[1].upper() + " Data-hora: " + data_menssage[0] + " Corretora-Compra: " + data_menssage[1] + " Corretora-Venda: " + data_menssage[2] + " Quantidade: " + data_menssage[3] + " Valor: " + data_menssage[4]
                 if topics[0] == "compra" or topics[0] == "venda":
                     messageFormat = topics[0].capitalize() +" - Ativo: "+ topics[1].upper() + " Quantidade: " + data_menssage[0] + " Valor: " + data_menssage[1] + " Corretora: " + data_menssage[2]
-
-                print(" [x] %r:%r" % (method.routing_key, body.decode()))
                 print(messageFormat)
 
             # Creates a new consumer to receive messages from the queue previously created

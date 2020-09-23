@@ -6,7 +6,7 @@ def main():
    emit_stock.run()
 
    emit_stock =  EmitStock(host='localhost', routing_key="transacao.petr2", message="25/08/2020; BKR1; BKR1; 100; 26,46")
-   emit_stock.run()
+   emit_stock.start()
 
 if __name__ == "__main__":
     main()

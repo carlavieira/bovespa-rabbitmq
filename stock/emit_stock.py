@@ -1,15 +1,12 @@
 #!/usr/bin/env python
-#!/usr/bin/env python
 import pika
 import sys
+import threading
 
-#!/usr/bin/env python
-import pika
-import sys
-
-class EmitStock():
+class EmitStock(threading.Thread):
 
     def __init__(self, host, routing_key, message):
+        threading.Thread.__init__(self)
         self.host = host
         self.routing_key = routing_key
         self.message = message
