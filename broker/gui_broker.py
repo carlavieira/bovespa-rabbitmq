@@ -12,7 +12,7 @@ layout = [
   [sg.Text('Servidor'), sg.Input('localhost')],
   [sg.Text('Broker'), sg.Input('BKR1')],
   [sg.Text('Ativo'), sg.Combo([
-    'ABEV3', 'PETR4', 'VALE5',
+    'petr1', 'PETR4', 'petr2',
     'ITUB5', 'BBDC4','BBAS3', 
     'CIEL3', 'PEETR3', 'HYPE3', 
     'VALE3','BBSE3', 'CTIP3', 
