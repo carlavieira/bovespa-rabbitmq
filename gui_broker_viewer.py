@@ -1,9 +1,12 @@
 import PySimpleGUI as sg
-from emit_broker import EmitBroker
-from receive_broker import ReceiveBroker
+from broker.emit_broker import EmitBroker
+from broker.receive_broker import ReceiveBroker
+from assets_list import AssetsList
 
 sg.theme('Default 1') 
 
+
+arrAssets = AssetsList.get_assetslist()
 # Layout
 layout = [
 	[sg.Text('Broker Viewer', size=(40, 0), font=('Helvetica', 12), justification='center')],

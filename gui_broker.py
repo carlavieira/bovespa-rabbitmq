@@ -2,10 +2,13 @@ import PySimpleGUI as sg
 
 from emit_broker import EmitBroker
 from receive_broker import ReceiveBroker
+from assets_list import AssetsList
 
 sg.theme('Default 1') 
 
 # Layout
+
+
 
 layout = [
   [sg.Text('Broker Panel', size=(40, 0), font=('Helvetica', 12), justification='center')],
