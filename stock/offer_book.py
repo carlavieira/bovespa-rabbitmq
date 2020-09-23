@@ -1,3 +1,5 @@
+from stock.transaction import Transaction
+
 class OfferBook():
 
     purchases_offers = []
@@ -20,8 +22,6 @@ class OfferBook():
         if topics[0] == "compra":
             offer["id"] = len(OfferBook.purchases_offers)
             OfferBook.purchases_offers.append(offer)
-
-        print("veio")
 
         OfferBook.check_offers(host=host, topics=topics, offer=offer)
     
@@ -46,7 +46,7 @@ class OfferBook():
 
                         if sale_amount > purchase_amount:
 
-                            # transação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=offer["amount"], value=offer["value"], broker_purchase=offer["broker"], broker_sale=sale_offer["broker"])
 
                             sale_offer["amount"] = str(sale_amount - purchase_amount)
                             OfferBook.purchases_offers.remove(offer)
@@ -55,7 +55,7 @@ class OfferBook():
                         
                         if sale_amount < purchase_amount:
 
-                            # transação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=sale_offer["amount"], value=offer["value"], broker_purchase=offer["broker"], broker_sale=sale_offer["broker"])
 
                             index_offer = OfferBook.purchases_offers.index(offer)
                             offer["amount"] = str(purchase_amount - sale_amount)
@@ -65,7 +65,7 @@ class OfferBook():
 
                         if sale_amount == purchase_amount:
 
-                            # trnasação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=offer["amount"], value=offer["value"], broker_purchase=offer["broker"], broker_sale=sale_offer["broker"])
 
                             OfferBook.purchases_offers.remove(offer)
                             OfferBook.sales_offers.remove(sale_offer)
@@ -88,7 +88,7 @@ class OfferBook():
 
                         if purchase_amount > sale_amount:
 
-                            # transação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=offer["amount"], value=purchase_offer["value"], broker_purchase=purchase_offer["broker"], broker_sale=offer["broker"])
 
                             purchase_offer["amount"] = str(purchase_amount - sale_amount)
                             OfferBook.sales_offers.remove(offer)
@@ -97,17 +97,17 @@ class OfferBook():
                         
                         if purchase_amount < sale_amount:
 
-                            # transação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=purchase_offer["amount"], value=purchase_offer["value"], broker_purchase=purchase_offer["broker"], broker_sale=offer["broker"])
 
                             index_offer = OfferBook.sales_offers.index(offer)
                             offer["amount"] = str(sale_amount - purchase_amount)
-                            OfferBook.purchases_offers.remove(sale_offer)
+                            OfferBook.purchases_offers.remove(purchase_offer)
                             OfferBook.sales_offers[index_offer] = offer
                             OfferBook.print_book()
 
                         if purchase_amount == sale_amount:
 
-                            # trnasação
+                            Transaction.store_transaction(host=host, asset=offer["asset"], amount=offer["amount"], value=purchase_offer["value"], broker_purchase=purchase_offer["broker"], broker_sale=offer["broker"])
 
                             OfferBook.sales_offers.remove(offer)
                             OfferBook.purchases_offers.remove(purchase_offer)
