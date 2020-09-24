@@ -2,8 +2,13 @@ import PySimpleGUI as sg
 
 from broker.emit_broker import EmitBroker
 from broker.receive_broker import ReceiveBroker
+from assets_list import AssetsList
 
 sg.theme('Default 1') 
+
+
+assets = AssetsList.get_assetslist()
+print(assets)
 
 # Layout
 
