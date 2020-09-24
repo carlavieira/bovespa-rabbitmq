@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 from broker.emit_broker import EmitBroker
 from broker.receive_broker import ReceiveBroker
+from assets.assets_list import AssetsList
 
 sg.theme('Default 1') 
 
@@ -11,12 +12,7 @@ layout = [
   [sg.Text('Broker Panel', size=(40, 0), font=('Helvetica', 12), justification='center')],
   [sg.Text('Servidor'), sg.Input('localhost')],
   [sg.Text('Broker'), sg.Input('BKR1')],
-  [sg.Text('Ativo'), sg.Combo([
-    'petr1', 'PETR4', 'petr2',
-    'ITUB5', 'BBDC4','BBAS3', 
-    'CIEL3', 'PEETR3', 'HYPE3', 
-    'VALE3','BBSE3', 'CTIP3', 
-    'GGBR4', 'FIBR3', 'RADL3'])],
+  [sg.Text('Ativo'), sg.Combo(AssetsList.get_assetslist())],
   [sg.Text('Quantidade'), sg.Input('', key='quantity')],
   [sg.Text('Preço'), sg.Input('', key='price')],
   [sg.Button('Compra', size=(20, 0)), sg.Button('Venda', size=(20, 0))],
