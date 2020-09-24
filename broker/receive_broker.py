@@ -36,7 +36,7 @@ class ReceiveBroker(threading.Thread):
                 channel.queue_bind(
                     exchange='BOLSADEVALORES', queue=queue_name, routing_key=binding_key)
 
-            print(' [*] Waiting for logs. To exit press CTRL+C')
+            #print(' [*] Waiting for logs. To exit press CTRL+C')
 
             # Defines the callback message that will be invoked inside basic_consumer to print the message when a new message is received
             def callback(ch, method, properties, body):
@@ -56,7 +56,6 @@ class ReceiveBroker(threading.Thread):
             channel.start_consuming()
 
         except KeyboardInterrupt:
-            print('Interrupted')
             try:
                 sys.exit(0)
             except SystemExit:

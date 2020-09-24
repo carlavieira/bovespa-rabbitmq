@@ -1,14 +1,11 @@
 import PySimpleGUI as sg
 
-from emit_broker import EmitBroker
-from receive_broker import ReceiveBroker
-from assets_list import AssetsList
+from broker.emit_broker import EmitBroker
+from broker.receive_broker import ReceiveBroker
 
 sg.theme('Default 1') 
 
 # Layout
-
-
 
 layout = [
   [sg.Text('Broker Panel', size=(40, 0), font=('Helvetica', 12), justification='center')],
@@ -20,8 +17,8 @@ layout = [
     'CIEL3', 'PEETR3', 'HYPE3', 
     'VALE3','BBSE3', 'CTIP3', 
     'GGBR4', 'FIBR3', 'RADL3'])],
-  [sg.Text('Quantidade'), sg.Input()],
-  [sg.Text('Preço'), sg.Input('')],
+  [sg.Text('Quantidade'), sg.Input('', key='quantity')],
+  [sg.Text('Preço'), sg.Input('', key='price')],
   [sg.Button('Compra', size=(20, 0)), sg.Button('Venda', size=(20, 0))],
   [sg.Button('Abrir Visualizador', size=(42,0))]
 ]
@@ -44,14 +41,17 @@ while True:
 
   print(submitValues)
   """
-
-  if event.lower() == 'compra' or event.lower() == 'venda':
-    routing_key = event.lower() + '.' + values[2]
-    message = values[3] + '; ' + values[4] + '; ' + values[1]
-  
-    emit_broker = EmitBroker(host=values[0], routing_key=routing_key,      message=message)
-    emit_broker.start()
-  
+  if values[3] != 0 and values[4] != 0:
+    window.FindElement('price').Update('') 
+    window.FindElement('quantity').Update('')
+    if event.lower() == 'compra' or event.lower() == 'venda':
+      routing_key = event.lower() + '.' + values[2]
+      message = values[3] + '; ' + values[4] + '; ' + values[1]
+    
+      emit_broker = EmitBroker(host=values[0], routing_key=routing_key,      message=message)
+      emit_broker.start()
+      window.FindElement('price').Update('') 
+      window.FindElement('quantity').Update('')
   if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
     break
 window.close()

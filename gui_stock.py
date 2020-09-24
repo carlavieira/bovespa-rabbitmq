@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
-
 from stock.emit_stock import EmitStock
 from stock.receive_stock import ReceiveStock
+import time
 
 
 sg.theme('Default 1') 
@@ -28,3 +28,7 @@ while True:
   if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
     break
 window.close()
+
+
+
+

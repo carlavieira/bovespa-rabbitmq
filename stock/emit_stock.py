@@ -24,7 +24,7 @@ class EmitStock(threading.Thread):
         # Sends message with the routing key to the exchange named 'BOLSADEVALORES'
         channel.basic_publish(
             exchange='BOLSADEVALORES', routing_key=self.routing_key, body=self.message)
-        print(" [x] Sent %r:%r" % (self.routing_key, self.message))
+        #print(" [x] Sent %r:%r" % (self.routing_key, self.message))
 
         # Terminate connection
         connection.close()
