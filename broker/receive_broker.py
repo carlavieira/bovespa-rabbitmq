@@ -43,9 +43,9 @@ class ReceiveBroker(threading.Thread):
                 topics = method.routing_key.split(".")
                 data_menssage = body.decode().split("; ")
                 if topics[0] == "transacao":
-                    messageFormat = "Transação - Ativo: "+ topics[1].upper() + " Data-hora: " + data_menssage[0] + " Corretora-Compra: " + data_menssage[1] + " Corretora-Venda: " + data_menssage[2] + " Quantidade: " + data_menssage[3] + " Valor: " + data_menssage[4]
+                    messageFormat = "Transação - Ativo: "+ topics[1].upper() + " Data-hora: " + data_menssage[0] + " Corretora-Compra: " + data_menssage[1] + " Corretora-Venda: " + data_menssage[2] + " Quantidade: " + data_menssage[3] + " Valor: " + data_menssage[4] + '\n'
                 if topics[0] == "compra" or topics[0] == "venda":
-                    messageFormat = topics[0].capitalize() +" - Ativo: "+ topics[1].upper() + " Quantidade: " + data_menssage[0] + " Valor: " + data_menssage[1] + " Corretora: " + data_menssage[2]
+                    messageFormat = topics[0].capitalize() +" - Ativo: "+ topics[1].upper() + " Quantidade: " + data_menssage[0] + " Valor: " + data_menssage[1] + " Corretora: " + data_menssage[2] + '\n'
                 print(messageFormat)
 
             # Creates a new consumer to receive messages from the queue previously created

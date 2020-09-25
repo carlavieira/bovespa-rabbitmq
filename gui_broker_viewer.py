@@ -21,30 +21,31 @@ command_history = []
 history_offset = 0
 #Window
 
-def initialize():
-	window = sg.Window('Broker Viewer', layout, margins=(20, 20))
 
-	while True:
-		event, values = window.read()
-		if event == 'Adicionar a Lista':
-			assets = values['assets'].rstrip()
-			command_history.append(assets)
-			history_offset = len(command_history)-1
-			window.FindElement('tracked_assets').Update(command_history)
-		elif event == 'Limpar Lista':
-			window.FindElement('tracked_assets').Update([])
-			command_history = []
-		elif event == 'Acompanhar':
-			arrAssets = []
-			for x in command_history:
-				assetsNome = '*.'+x
-				arrAssets.append(assetsNome)
-			receive_brocker = ReceiveBroker(host='localhost', binding_keys=arrAssets)
-			receive_brocker.start()
-		if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
-			break
-	window.close()
+window = sg.Window('Broker Viewer', layout, margins=(20, 20))
+receive_brocker = ReceiveBroker(host='localhost', binding_keys=['*.petr3', '*.itub4'])
+receive_brocker.start()
 
-initialize()
+while True:
+	event, values = window.read()
+	if event == 'Adicionar a Lista':
+		assets = values['assets'].rstrip()
+		command_history.append(assets)
+		history_offset = len(command_history)-1
+		window.FindElement('tracked_assets').Update(command_history)
+	elif event == 'Limpar Lista':
+		window.FindElement('tracked_assets').Update([])
+		command_history.clear()
+	elif event == 'Acompanhar':
+		arrAssets = []
+		for x in command_history:
+			assetsNome = '*.'+x.lower()
+			arrAssets.append(assetsNome)
+		print('----')
+		#receive_brocker = ReceiveBroker(host='localhost', binding_keys=arrAssets)
+		#receive_brocker.start()
+	if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
+		break
+window.close()
 
 

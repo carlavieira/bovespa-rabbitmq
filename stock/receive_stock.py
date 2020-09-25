@@ -32,9 +32,6 @@ class ReceiveStock(threading.Thread):
             # A bind is created between the exchange 'BROKER' and the new queue created for all topics
             channel.queue_bind(exchange='BROKER', queue=queue_name, routing_key="#")
 
-            # [OTAVIO] Colocar aqui código de mandar a menssagem "Negociações iniciadas" na interface StockGUI
-            print(' [*] Waiting for logs. To exit press CTRL+C')
-
             # Defines the callback message that will be invoked inside basic_consumer to print the message when a new message is received
             def callback(ch, method, properties, body):
                 topics = method.routing_key.split(".")
@@ -45,7 +42,6 @@ class ReceiveStock(threading.Thread):
                 if topics[0] == "compra" or topics[0] == "venda":
                     messageFormat = topics[0].capitalize() +" - Ativo: "+ topics[1].upper() + " Quantidade: " + data_menssage[0] + " Valor: " + data_menssage[1] + " Corretora: " + data_menssage[2].upper()
                 
-                # [OTAVIO] Colocar aqui código para passar o messageFormat para a interface StockGUI
                 print(messageFormat)
 
                 emit_stock =  EmitStock(host=self.host, routing_key=method.routing_key, message=body.decode())
