@@ -12,7 +12,8 @@ assets = AssetsList.get_assetslist()
 # Layout
 layout = [
   [sg.Text('Broker Panel', size=(40, 0), font=('Helvetica', 12), justification='center')],
-  [sg.Text('Servidor'), sg.Input('localhost')],
+  [sg.Text('Servidor'), sg.Input('localhost', size=(0,2))],
+  [sg.Text('Informações da oferta:', size=(30,2))],
   [sg.Text('Broker'), sg.Combo(assets)],
   [sg.Text('Ativo'), sg.Combo(assets)],
   [sg.Text('Quantidade'), sg.Input('')],
