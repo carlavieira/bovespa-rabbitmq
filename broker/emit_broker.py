@@ -4,7 +4,9 @@ import sys
 import threading
 
 class EmitBroker(threading.Thread):
-
+    """
+    thread responsável por fazer a publicação de uma oferta de compra ou venda por uma corretora à Bolsa de Valores.
+    """
     def __init__(self, host, routing_key, message):
         threading.Thread.__init__(self)
         self.host = host

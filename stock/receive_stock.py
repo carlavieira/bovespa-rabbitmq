@@ -6,7 +6,9 @@ from stock.emit_stock import EmitStock
 from stock.offer_book import OfferBook
 
 class ReceiveStock(threading.Thread):
-
+    """
+    thread responsável por fazer a receber as todas as mensagens de oferta de compra e venda das corretoras
+    """
     def __init__(self, host):
         threading.Thread.__init__(self)
         self.host = host
@@ -45,7 +47,7 @@ class ReceiveStock(threading.Thread):
                 if topics[0] == "compra" or topics[0] == "venda":
                     messageFormat = topics[0].capitalize() +" - Ativo: "+ topics[1].upper() + " Quantidade: " + data_menssage[0] + " Valor: " + data_menssage[1] + " Corretora: " + data_menssage[2].upper()
                 
-                # [OTAVIO] Colocar aqui código para passar o messageFormat para a interface StockGUI
+                # [OTAVI] Colocar aqui código para passar o messageFormat para a interface StockGUI
                 print(messageFormat)
 
                 emit_stock =  EmitStock(host=self.host, routing_key=method.routing_key, message=body.decode())
