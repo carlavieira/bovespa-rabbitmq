@@ -6,7 +6,9 @@ from stock.emit_stock import EmitStock
 from stock.offer_book import OfferBook
 
 class ReceiveStock(threading.Thread):
-
+    """
+    thread responsável por fazer a receber as todas as mensagens de oferta de compra e venda das corretoras
+    """
     def __init__(self, host):
         threading.Thread.__init__(self)
         self.host = host

@@ -1,12 +1,17 @@
 from stock.transaction import Transaction
 
 class OfferBook():
-
+    """
+    classe responsável armazenar as ofertas de compra e venda realizadas e efetuar a lógica de negócio para conferir correspondências entre ofertas de compra e venda para realizar uma transação.
+    """
     purchases_offers = []
     sales_offers = []
 
     @staticmethod
     def store_offer(host, routing_key, menssage):
+        """
+        método responsável por armazenar as ofertas de compra e venda realizadas.
+        """
         topics = routing_key.split(".")
         data_menssage = menssage.split("; ")
 
@@ -27,8 +32,9 @@ class OfferBook():
     
     @staticmethod
     def check_offers(host, topics, offer):
-
-
+        """
+        método responsável por efetuar a lógica de negócio para conferir correspondências entre ofertas de compra e venda para realizar uma transação.
+        """
         if topics[0] == "compra":
 
             purchase_value = float(offer["value"])

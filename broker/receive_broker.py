@@ -7,7 +7,9 @@ import threading
 
 
 class ReceiveBroker(threading.Thread):
-
+    """
+    thread responsável por fazer a receber as mensagens da Bolsa de Valores sobre todas as movimentações a respeito dos ativos selecionados.
+    """
     def __init__(self, host, binding_keys=["#"]):
         threading.Thread.__init__(self)
         self.host = host

@@ -2,12 +2,16 @@ from datetime import datetime
 from stock.emit_stock import EmitStock
 
 class Transaction():
-
+    """
+    classe responsável gerar a mensagem de transação pela EmmitStock e por armazenar as transações realizadas
+    """
     transactions = []
 
     @staticmethod
     def store_transaction(host, asset, amount, value, broker_sale, broker_purchase):
-        
+        """
+        método responsável armazenar uma nova transação realizada e instanciar a mensagem de transação pela EmmitStock
+        """    
         now = datetime.now()
 
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")

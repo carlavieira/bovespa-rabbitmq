@@ -5,7 +5,9 @@ import threading
 
 
 class EmitStock(threading.Thread):
-
+    """
+    thread responsável por fazer a publicação de uma oferta de compra ou venda feito por uma corretora recebida pela Bolsa de Valores ou a publicação de uma transação entre duas corretoras.
+    """
     def __init__(self, host, routing_key, message):
         threading.Thread.__init__(self)
         self.host = host
