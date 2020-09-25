@@ -8,7 +8,7 @@ sg.theme('Default 1')
 
 # Layout
 layout = [
-	[sg.Text('Broker Viewer', size=(40, 0), font=('Helvetica', 12), justification='center')],
+	[sg.Text('Broker Viewer', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
 	[sg.Text('Servidor'), sg.Input('localhost')],
 	[sg.Text('Ativo'), sg.Combo(AssetsList.get_assetslist(), key='assets')],
 	[sg.Button('Adicionar a Lista', size=(21,0)), sg.Button('Limpar Lista', size=(21,0))],
