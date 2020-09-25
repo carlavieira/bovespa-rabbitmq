@@ -23,14 +23,13 @@ history_offset = 0
 
 
 window = sg.Window('Broker Viewer', layout, margins=(20, 20))
-receive_brocker = ReceiveBroker(host='localhost', binding_keys=['*.petr3', '*.itub4'])
-receive_brocker.start()
 
 while True:
 	event, values = window.read()
 	if event == 'Adicionar a Lista':
 		assets = values['assets'].rstrip()
-		command_history.append(assets)
+		if assets not in command_history :
+			command_history.append(assets)
 		history_offset = len(command_history)-1
 		window.FindElement('tracked_assets').Update(command_history)
 	elif event == 'Limpar Lista':
@@ -39,11 +38,13 @@ while True:
 	elif event == 'Acompanhar':
 		arrAssets = []
 		for x in command_history:
-			assetsNome = '*.'+x.lower()
-			arrAssets.append(assetsNome)
-		print('----')
-		#receive_brocker = ReceiveBroker(host='localhost', binding_keys=arrAssets)
-		#receive_brocker.start()
+			assetsName = '*.'+x.lower()
+			arrAssets.append(assetsName)
+		print('Acompanhando:')
+		print(arrAssets)
+		print('\n')
+		receive_brocker = ReceiveBroker(host='localhost', binding_keys=arrAssets)
+		receive_brocker.start()
 	if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
 		break
 window.close()

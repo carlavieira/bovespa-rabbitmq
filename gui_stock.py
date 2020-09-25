@@ -1,9 +1,6 @@
 import PySimpleGUI as sg
 from stock.emit_stock import EmitStock
 from stock.receive_stock import ReceiveStock
-import time
-import os
-
 
 sg.theme('Default 1') 
 
