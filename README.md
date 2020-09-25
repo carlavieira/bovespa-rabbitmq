@@ -1,6 +1,6 @@
 # Simulação da Bolsa de Valores com Rabbit MQ
 
-Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
+O projeto é um sistema desenvilvido em python utilizando o sistema de pub/sub com tópicos do  RabbitMQ para simular a troca de mensagens entre corretoras, realizando ofertas de compra e venda de ativos e acompanhando as movimentações de certos ativos, e a bolsa de valores, recebendo as ofertas, armazenando, gerando transações e enviando essas movimentações às corretoras.
 
 ## Alunos integrantes da equipe
 
@@ -41,7 +41,7 @@ Para instalar as dependências do projeto, você pode rodar o seguinte comando:
 ```shell
 pip install -r requirements.txt
 ```
-## Interface da Corretora
+### Interface da Corretora
 
 Para ter acesso a interface da corretora, vocẽ deve, na raiz do projeto, rodar o seguinte comando:
 
@@ -53,7 +53,7 @@ Se for uma oferta de compra, selecionar o botão "Compra", se for de venda, o bo
 Para poder acompanhar qualquer motimentação (ofertas de compra, ofertas de venda ou transações) sobre um ou mais ativos, você pode apertar o botão "Abrir Visualizador". 
 Assim, irá abrir uma nova interface onde você pode colocar o servidor o qual quer conectar ao RabbitMQ, e então selecionar os ativos que quer seguir. Para selecionar um ativo, basta escolhe-lo entre as opções mostradas e clicar no botão "Adicionar a lista". Caso tenha cometido algum erro ou queira mudar as seleções escolhidas, você pode clicar em "Limpar Lista" e recomeçar a sua escolha. Quando você estiver sua lista pronta, clique em "Acompanhar" para receber no painel qualquer motimentação sobre aqueles ativos.
 
-## Interface da Bolsa de Valores
+### Interface da Bolsa de Valores
 
 Para ter acesso a interface da bolsa de valores, vocẽ deve, na raiz do projeto, rodar o seguinte comando:
 
