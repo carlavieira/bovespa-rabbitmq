@@ -61,3 +61,43 @@ Para ter acesso a interface da bolsa de valores, vocẽ deve, na raiz do projeto
 python gui_stock.py
 ```
 Nela você pode inserir o servidor que gostaria de conectar ao RabbitMQ e então abrir as negociações da bolsa. No visor você irá receber ofertas de compra e venda das corretoras, e a bolsa encaminha essas ofertas para as corretoras que estão acompanhando os respectivos ativos. Quando uma opção de compra for de preço maior ou igual de uma oferta de venda cadastrada no livro de ofertas sobre um mesmo ativo ou uma oferta de venda for de valor menor ou igual a uma de compra cadastrada, é gerado automaticamente uma trnasação entre as corretoras e a mensagem sobre a trnasação é enviada a todas as corretoras que acompanham aquele ativo.
+
+## Estrutura do Sitema
+
+# Classes
+
+* assets
+    - **AssetsList:** classe responsável por realizar a leitura do arquivo csv com os ativos da bolsa e responder uma lista.
+
+* broker
+    - **EmmitBroker:** thread responsável por fazer a publicação de uma oferta de compra ou venda por uma corretora à Bolsa de Valores.
+    - **RecieveBroker:** thread responsável por fazer a receber as mensagens da Bolsa de Valores sobre todas as movimentações a respeito dos ativos selecionados.
+
+* stock
+    - **EmmitStock:** thread responsável por fazer a publicação de uma oferta de compra ou venda feito por uma corretora recebida pela Bolsa de Valores ou a publicação de uma transação entre duas corretoras.
+    - **RecieveStock:** thread responsável por fazer a receber as todas as mensagens de oferta de compra e venda das corretoras.
+    - **OfferBook:** classe responsável armazenar as ofertas de compra e venda realizadas e efetuar a lógica de negócio para conferir correspondências entre ofertas de compra e venda para realizar uma transação.
+    - **Transaction:** classe responsável gerar a mensagem de transação pela EmmitStock e por armazenar as transações realizadas.
+
+
+# Operações 
+
+* assets
+    - **AssetsList.get_assetslist():** método estático que realiza a leitura do arquivo csv `bovespa_assets.csv` com os ativos da bolsa e responder uma lista com todos os códigos.
+
+* broker
+    - **EmmitBroker.run():** roda thread responsável por fazer a publicação de uma oferta de compra ou venda por uma corretora à Bolsa de Valores.
+    - **RecieveBroker.run():** thread responsável por fazer a receber as mensagens da Bolsa de Valores sobre todas as movimentações a respeito dos ativos selecionados.
+
+* stock
+    - **EmmitStock.run():** roda thread responsável por fazer a publicação de uma oferta de compra ou venda feito por uma corretora recebida pela Bolsa de Valores ou a publicação de uma transação entre duas corretoras.
+    - **RecieveStock.run():** roda thread responsável por fazer a receber as todas as mensagens de oferta de compra e venda das corretoras.
+    - **OfferBook.store_offer(host, routing_key, menssage):** método responsável por armazenar as ofertas de compra e venda realizadas.
+    - **OfferBook.check_offers(host, topics, offer):** método responsável por efetuar a lógica de negócio para conferir correspondências entre ofertas de compra e venda para realizar uma transação.
+    - **Transaction.store_transaction(host, asset, amount, value, broker_sale, broker_purchase):** método responsável armazenar uma nova transação realizada e instanciar a mensagem de transação pela EmmitStock.
+
+## Diagramas
+
+### Diagrama de Classes
+
+### Diagrama de Componentes
