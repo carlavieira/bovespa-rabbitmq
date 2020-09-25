@@ -15,7 +15,7 @@ class gui_broker():
 
   # Layout
   layout = [
-    [sg.Text('Broker Panel', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
+    [sg.Text('Painel da Corretora', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
     [sg.Text('Servidor'), sg.Input('localhost', size=(20,2))],
     [sg.Text('Informações da oferta:',text_color='red', justification='center')],
     [sg.Text('Cod. Corretora'), sg.Combo(assets), sg.Text('Ativo'), sg.Combo(assets)],
@@ -25,7 +25,7 @@ class gui_broker():
   ]
 
   #Window
-  window = sg.Window('Broker Panel', layout, margins=(20, 20))
+  window = sg.Window('Painel da Corretora', layout, margins=(20, 20))
 
   while True:
     event, values = window.read()

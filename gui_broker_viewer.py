@@ -8,7 +8,7 @@ sg.theme('Default 1')
 
 # Layout
 layout = [
-	[sg.Text('Broker Viewer', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
+	[sg.Text('Painel de Acompanhamento', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
 	[sg.Text('Servidor'), sg.Input('localhost')],
 	[sg.Text('Ativo'), sg.Combo(AssetsList.get_assetslist(), key='assets')],
 	[sg.Button('Adicionar a Lista', size=(21,0)), sg.Button('Limpar Lista', size=(21,0))],
@@ -22,7 +22,7 @@ history_offset = 0
 #Window
 
 
-window = sg.Window('Broker Viewer', layout, margins=(20, 20))
+window = sg.Window('Painel de Acompanhamento', layout, margins=(20, 20))
 
 while True:
 	event, values = window.read()

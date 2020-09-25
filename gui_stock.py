@@ -7,7 +7,7 @@ sg.theme('Default 1')
 # Layout
 
 layout = [
-  [sg.Text('Stock Painel', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
+  [sg.Text('Painel da Bolsa de Valores', size=(40, 0), text_color='#8B0000', font=('Helvetica', 12), justification='center')],
   [sg.Text('Servidor'),
    sg.Input('localhost', size=(26,0)),
    sg.Button('Abrir Negociações', size=(21, 0), key='button')],
@@ -15,7 +15,7 @@ layout = [
 ]
 
 #Window
-window = sg.Window('Stock Painel', layout, margins=(20, 20))
+window = sg.Window('Painel da Bolsa de Valores', layout, margins=(20, 20))
 
 
 isUnderNegotiation = False
