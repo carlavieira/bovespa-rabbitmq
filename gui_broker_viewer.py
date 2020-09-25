@@ -2,18 +2,15 @@ import PySimpleGUI as sg
 from broker.emit_broker import EmitBroker
 from broker.receive_broker import ReceiveBroker
 
+from assets.assets_list import AssetsList
+
 sg.theme('Default 1') 
 
 # Layout
 layout = [
 	[sg.Text('Broker Viewer', size=(40, 0), font=('Helvetica', 12), justification='center')],
 	[sg.Text('Servidor'), sg.Input('localhost')],
-	[sg.Text('Ativo'), sg.Combo([
-	'petr1', 'PETR4', 'petr2',
-	'ITUB5', 'BBDC4','BBAS3', 
-	'CIEL3', 'PEETR3', 'HYPE3', 
-	'VALE3','BBSE3', 'CTIP3', 
-	'GGBR4', 'FIBR3', 'RADL3'], key='assets')],
+	[sg.Text('Ativo'), sg.Combo(AssetsList.get_assetslist(), key='assets')],
 	[sg.Button('Adicionar a Lista', size=(21,0)), sg.Button('Limpar Lista', size=(21,0))],
 	[sg.T('Acompanhando:'), sg.T('', size=(40,2), key='tracked_assets')],
 	[sg.Button('Acompanhar', size=(42,0))],
