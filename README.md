@@ -103,3 +103,5 @@ Nela você pode inserir o servidor que gostaria de conectar ao RabbitMQ e então
 ![](https://i.ibb.co/HPBSMQT/Diagrama-de-Classe-2.png)
 
 ### Diagrama de Componentes
+
+![](https://i.ibb.co/pKb4mdp/Diagrama-de-Componentes-Rabbit-MQ.png)
