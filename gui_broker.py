@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from broker.emit_broker import EmitBroker
 from broker.receive_broker import ReceiveBroker
-from assets_list import AssetsList
+from assets.assets_list import AssetsList
 
 sg.theme('Default 1') 
 

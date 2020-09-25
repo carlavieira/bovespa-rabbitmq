@@ -1,5 +1,4 @@
 import csv
-
 class AssetsList():
 
     @staticmethod
@@ -8,8 +7,6 @@ class AssetsList():
         lines = csv.reader(file, delimiter=";")
 
         assets = []
-
         for line in lines:
             assets.append(line[0])
-        print(assets)
         return assets
