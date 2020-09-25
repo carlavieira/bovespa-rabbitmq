@@ -37,17 +37,17 @@ while True:
 
   print(submitValues)
   """
-  if values[3] != 0 and values[4] != 0:
+  # if values[3] != 0 and values[4] != 0:
+  window.FindElement('price').Update('') 
+  window.FindElement('quantity').Update('')
+  if event.lower() == 'compra' or event.lower() == 'venda':
+    routing_key = event.lower() + '.' + values[2].lower()
+    message = values[3] + '; ' + values[4] + '; ' + values[1]
+    
+    emit_broker = EmitBroker(host=values[0], routing_key=routing_key,      message=message)
+    emit_broker.start()
     window.FindElement('price').Update('') 
     window.FindElement('quantity').Update('')
-    if event.lower() == 'compra' or event.lower() == 'venda':
-      routing_key = event.lower() + '.' + values[2]
-      message = values[3] + '; ' + values[4] + '; ' + values[1]
-    
-      emit_broker = EmitBroker(host=values[0], routing_key=routing_key,      message=message)
-      emit_broker.start()
-      window.FindElement('price').Update('') 
-      window.FindElement('quantity').Update('')
   if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
     break
 window.close()
