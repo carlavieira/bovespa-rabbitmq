@@ -33,6 +33,7 @@ def initialize():
 			window.FindElement('tracked_assets').Update(command_history)
 		elif event == 'Limpar Lista':
 			window.FindElement('tracked_assets').Update([])
+			command_history = []
 		elif event == 'Acompanhar':
 			arrAssets = []
 			for x in command_history:
